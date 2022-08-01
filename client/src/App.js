@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Nav from "./components/Nav";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -24,14 +25,19 @@ function App() {
         .then((res) => {
           const blogs = res.blogs;
           setBlogs(blogs);
-        });
+        })
+        .catch((err) => console.error("Error: ", err));
     };
 
     fetchUsers();
     fetchBlogs();
   }, []);
 
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Nav />
+    </div>
+  );
 }
 
 export default App;
