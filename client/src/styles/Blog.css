@@ -1,0 +1,18 @@
+.blog {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 50px;
+  text-align: left;
+}
+
+.blog .text {
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+@media only screen and (min-width: 640px) {
+  .blog {
+    margin: 50px 100px;
+  }
+}
