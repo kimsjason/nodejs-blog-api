@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/Nav";
 import Blogs from "./components/Blogs";
+import CreateBlog from "./components/CreateBlog";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -41,6 +42,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={"/blogs"} element={<Blogs blogs={blogs} />} />
+          <Route path={"/blogs/create-blog"} element={<CreateBlog />} />
         </Routes>
       </BrowserRouter>
     </div>
