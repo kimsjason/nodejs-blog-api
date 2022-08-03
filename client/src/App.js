@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/Nav";
+import Blogs from "./components/Blogs";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -36,9 +37,11 @@ function App() {
 
   return (
     <div className="App">
+      <Nav />
       <BrowserRouter>
-        <Nav />
-        <Routes></Routes>
+        <Routes>
+          <Route path={"/blogs"} element={<Blogs blogs={blogs} />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
