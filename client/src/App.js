@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import Blogs from "./components/Blogs";
 import Blog from "./components/Blog";
 import CreateBlog from "./components/CreateBlog";
+import Signup from "./components/Signup";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -42,6 +43,7 @@ function App() {
       <Nav />
       <BrowserRouter>
         <Routes>
+          <Route path={"/signup"} element={<Signup />} />
           <Route path={"/blogs"} element={<Blogs blogs={blogs} />} />
           <Route path={"/blogs/blog/:id"} element={<Blog />} />
           <Route path={"/blogs/create-blog"} element={<CreateBlog />} />
