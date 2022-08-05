@@ -1,6 +1,6 @@
 const { body, validationResult } = require("express-validator");
-
 const User = require("../models/user");
+const bcryptjs = require("bcryptjs");
 
 /* GET - read all users. */
 exports.users = (req, res, next) => {
@@ -90,23 +90,28 @@ exports.user_post = [
     // extract validation errors from a request
     const errors = validationResult(req);
 
-    // create a User object with escaped and trimmed data
-    const user = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password,
-    });
-
     if (!errors.isEmpty()) {
       res.json(errors);
     } else {
-      user.save();
-      res.json(user);
+      bcryptjs.hash(req.body.password, 10, (err, hashedPassword) => {
+        if (err) {
+          return next(err);
+        }
+        // create a User object with escaped and trimmed data
+        const user = new User({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          username: req.body.username,
+          password: hashedPassword,
+        });
+        user.save();
+        res.json(user);
+      });
     }
   },
 ];
+
 /* PUT - update user. */
 exports.user_put = (req, res, next) => {
   User.findByIdAndUpdate(req.params.id, {

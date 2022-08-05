@@ -8,7 +8,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
 require("dotenv").config();
-
+const bcryptjs = require("bcryptjs");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const blogsRouter = require("./routes/blogs");
@@ -34,11 +34,20 @@ passport.use(
         return done(null, false, { message: "Incorrect username" });
       }
 
-      if (user.password !== password) {
-        return done(null, false, { message: "Incorrect password" });
-      }
+      bcryptjs.compare(password, user.password, (err, res) => {
+        if (err) {
+          return next(err);
+        }
 
-      return done(null, user);
+        // passwords match
+        if (res) {
+          return done(null, user);
+        }
+        // passwords don't match
+        else {
+          return done(null, false);
+        }
+      });
     });
   })
 );
