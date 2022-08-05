@@ -1,9 +1,10 @@
+import { useContext } from "react";
+import { authContext } from "../contexts/AuthContext";
 import { ReactComponent as Logo } from "../assets/cubes-solid.svg";
 import "../styles/Nav.css";
 
 const Nav = () => {
-  // const navigate = useNavigate();
-  const isAuthenticated = JSON.parse(localStorage.getItem("isAuthenticated"));
+  const { auth, setAuth } = useContext(authContext);
 
   const logout = () => {
     fetch("http://localhost:9000/logout", {
@@ -14,9 +15,8 @@ const Nav = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        localStorage.setItem("isAuthenticated", res.isAuthenticated);
-        // redirect to home page
-        window.location.href = "http://localhost:3000/";
+        setAuth({ loading: false, data: res.isAuthenticated });
+        window.location.href = "/";
       });
   };
 
@@ -36,7 +36,7 @@ const Nav = () => {
             <a href="/bloggers">Bloggers</a>
           </li>
         </ul>
-        {isAuthenticated ? (
+        {auth.data ? (
           <ul className="your-account">
             <li className="create-blog">
               <a href="/blogs/create-blog">Create Blog</a>

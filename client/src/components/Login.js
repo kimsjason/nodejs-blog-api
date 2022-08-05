@@ -1,18 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { authContext } from "../contexts/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const isAuthenticated = JSON.parse(localStorage.getItem("isAuthenticated"));
-    if (isAuthenticated) {
-      navigate("/");
-    }
-  }, []);
-
+  const { setAuth } = useContext(authContext);
   const [input, setInput] = useState({});
   const [errorMessages, setErrorMessages] = useState("");
+
   const handleInputChange = (event) => {
     setInput({ ...input, [event.target.name]: event.target.value });
   };
@@ -31,7 +26,7 @@ const Login = () => {
         const isAuthenticated = res.isAuthenticated;
         // login successful - redirect to home page
         if (isAuthenticated) {
-          localStorage.setItem("isAuthenticated", isAuthenticated);
+          setAuth({ loading: false, data: isAuthenticated });
           navigate("/");
         } else {
           setErrorMessages(res.error);
