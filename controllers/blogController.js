@@ -1,5 +1,6 @@
 const Blog = require("../models/blog");
 const Comment = require("../models/comment");
+const { body, validationResult } = require("express-validator");
 
 /* ---------- BLOG CONTROLLER FUNCTIONS ---------- */
 /* GET - read all blogs. */
@@ -32,13 +33,34 @@ exports.blog_get = (req, res, next) => {
 };
 
 /* POST - create blog.  */
-exports.blog_post = (req, res, next) => {
-  Blog.findOne({ title: req.body.title }).exec((err, title) => {
-    if (err) {
-      return next(err);
-    }
+exports.blog_post = [
+  // validate and sanitize fields
+  body("title", "Please enter a valid title.")
+    .isLength({ min: 3 })
+    .withMessage("Title must be at least 3 characters.")
+    .custom((title) => {
+      return Blog.findOne({ title: title }).then((blog) => {
+        if (blog) {
+          return Promise.reject("A blog with that title already exists.");
+        }
+      });
+    })
+    .trim()
+    .escape(),
+  body("text")
+    .isLength({ min: 100 })
+    .withMessage("Blog must be at least 100 characters.")
+    .trim()
+    .escape(),
 
-    if (!title) {
+  (req, res, next) => {
+    // extract validation errors from a request
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // there are errors
+      res.json(errors);
+    } else {
       const newBlog = new Blog({
         title: req.body.title,
         text: req.body.text,
@@ -53,11 +75,9 @@ exports.blog_post = (req, res, next) => {
 
         res.json({ blog });
       });
-    } else {
-      res.json({ error: "A blog with that title already exists." });
     }
-  });
-};
+  },
+];
 
 /* PUT - update blog. */
 exports.blog_put = (req, res, next) => {
