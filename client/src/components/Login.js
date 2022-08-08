@@ -26,8 +26,11 @@ const Login = () => {
         const isAuthenticated = res.isAuthenticated;
         // login successful - redirect to home page
         if (isAuthenticated) {
-          setAuth({ loading: false, data: isAuthenticated });
-          navigate("/");
+          setAuth({
+            loading: false,
+            data: { user: res.user, isAuthenticated: res.isAuthenticated },
+          });
+          navigate("/", { replace: true });
         } else {
           setErrorMessages(res.error);
         }

@@ -15,7 +15,10 @@ const Nav = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        setAuth({ loading: false, data: res.isAuthenticated });
+        setAuth({
+          loading: false,
+          data: { user: res.user, isAuthenticated: res.isAuthenticated },
+        });
         window.location.href = "/";
       });
   };
@@ -36,7 +39,7 @@ const Nav = () => {
             <a href="/bloggers">Bloggers</a>
           </li>
         </ul>
-        {auth.data ? (
+        {auth.data.isAuthenticated ? (
           <ul className="your-account">
             <li className="create-blog">
               <a href="/blogs/create-blog">Create Blog</a>

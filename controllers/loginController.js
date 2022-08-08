@@ -8,24 +8,21 @@ exports.login_post = [
   body("password").trim().escape(),
 
   // authenticate user credentials
+  passport.authenticate("local"),
   (req, res, next) => {
-    passport.authenticate("local", (err, user) => {
-      if (err) {
-        next(err);
-      }
+    if (!req.user) {
+      res.json({ error: "Username and password do not match." });
+    } else {
+      req.logIn(req.user, (err) => {
+        if (err) {
+          return next(err);
+        }
 
-      if (!user) {
-        res.json({ error: "Username and password do not match." });
-      } else {
-        req.login(user, (err) => {
-          if (err) {
-            return next(err);
-          }
-
-          res.json({ isAuthenticated: true });
-        });
-      }
-    })(req, res);
+        // remove password before sending to client
+        delete req.user._doc.password;
+        res.json({ user: req.user, isAuthenticated: true });
+      });
+    }
   },
 ];
 
@@ -35,6 +32,6 @@ exports.logout_post = (req, res, next) => {
       return next(err);
     }
 
-    res.json({ isAuthenticated: false });
+    res.json({ user: null, isAuthenticated: false });
   });
 };
