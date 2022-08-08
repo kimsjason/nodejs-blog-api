@@ -15,7 +15,9 @@ const BlogCard = ({ blog }) => {
           {new Date(blog.createdAt).toLocaleDateString()}
         </div>
         <div className="title">{blog.title}</div>
-        <div className="author">by {blog.author}</div>
+        <div className="author">
+          by {`${blog.author.firstName} ${blog.author.lastName}`}
+        </div>
         <div className="text">{blog.text.slice(0, 250)}...</div>
         <a href={`/blogs/blog/${blog._id}`} className="read-more">
           Read More

@@ -4,28 +4,31 @@ const Comment = require("../models/comment");
 /* ---------- BLOG CONTROLLER FUNCTIONS ---------- */
 /* GET - read all blogs. */
 exports.blogs = (req, res, next) => {
-  Blog.find().exec((err, blogs) => {
-    if (err) {
-      return next(err);
-    }
+  Blog.find()
+    .populate("author", "-password")
+    .exec((err, blogs) => {
+      if (err) {
+        return next(err);
+      }
 
-    res.json({ blogs });
-  });
+      res.json({ blogs });
+    });
 };
 
 /* GET - read blog. */
 exports.blog_get = (req, res, next) => {
-  Blog.findById(req.params.id).exec((err, blog) => {
-    if (err) {
-      return next(err);
-    }
-
-    if (!blog) {
-      res.json({ error: "Blog doesn't exist" });
-    } else {
-      res.json({ blog });
-    }
-  });
+  Blog.findById(req.params.id)
+    .populate("author", "-password")
+    .exec((err, blog) => {
+      if (err) {
+        return next(err);
+      }
+      if (!blog) {
+        res.json({ error: "Blog doesn't exist" });
+      } else {
+        res.json({ blog });
+      }
+    });
 };
 
 /* POST - create blog.  */

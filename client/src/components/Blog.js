@@ -4,7 +4,13 @@ import "../styles/Blog.css";
 
 const Blog = () => {
   const blogID = useParams().id;
-  const [blog, setBlog] = useState({});
+  const [blog, setBlog] = useState({
+    title: "",
+    author: "",
+    text: "",
+    published: "",
+    comments: [],
+  });
 
   useEffect(() => {
     // fetch blog from database
@@ -23,7 +29,9 @@ const Blog = () => {
       <p className="publish-date">
         {new Date(blog.createdAt).toLocaleDateString()}
       </p>
-      <p className="author">by {blog.author}</p>
+      <p className="author">
+        by {`${blog.author.firstName} ${blog.author.lastName}`}
+      </p>
       <h1>{blog.title}</h1>
       <div className="text">{blog.text}</div>
     </div>

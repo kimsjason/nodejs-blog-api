@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { authContext } from "../contexts/AuthContext";
 
 const CreateBlog = () => {
+  const { auth } = useContext(authContext);
   const navigate = useNavigate();
   const [input, setInput] = useState({
     title: "",
-    author: "",
+    author: auth.data.user._id,
     text: "",
     published: false,
     comments: [],
@@ -25,7 +27,7 @@ const CreateBlog = () => {
     });
     event.preventDefault();
 
-    navigate("/blogs");
+    navigate("/blogs", { replace: true });
     window.location.reload();
   };
 
@@ -38,15 +40,6 @@ const CreateBlog = () => {
           id="title"
           type="text"
           name="title"
-          onChange={handleInputChange}
-          required
-        />
-
-        <label htmlFor="author">Author</label>
-        <input
-          id="author"
-          type="text"
-          name="author"
           onChange={handleInputChange}
           required
         />
