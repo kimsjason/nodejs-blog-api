@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import PrivateRoute from "./components/PrivateRoute";
 import Nav from "./components/Nav";
-import Blogs from "./components/Blogs";
-import Blog from "./components/Blog";
-import CreateBlog from "./components/CreateBlog";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import PrivateRoute from "./components/PrivateRoute";
+import Blogs from "./components/Blogs";
+import Blog from "./components/Blog";
+import MyBlogs from "./components/MyBlogs";
+import CreateBlog from "./components/CreateBlog";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -48,7 +49,15 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/blogs" element={<Blogs blogs={blogs} />} />
-          <Route path="/blogs/blog/:id" element={<Blog />} />
+          <Route path="/blogs/blog/:id" element={<Blog blogs={blogs} />} />
+          <Route
+            path="/blogs/my-blogs"
+            element={
+              <PrivateRoute>
+                <MyBlogs />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/blogs/create-blog"
             element={

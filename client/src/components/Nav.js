@@ -44,8 +44,8 @@ const Nav = () => {
             <li className="create-blog">
               <a href="/blogs/create-blog">Create Blog</a>
             </li>
-            <li className="your-blogs">
-              <a href="/blogs/create-blog">My Blogs</a>
+            <li className="my-blogs">
+              <a href="/blogs/my-blogs">My Blogs</a>
             </li>
             <li className="logout">
               <a href="#" onClick={logout}>

@@ -1,0 +1,33 @@
+.my-blogs {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.my-blogs .blog-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  gap: 50px;
+  padding: 10px 0;
+  margin: 0 50px;
+  border-bottom: 1px solid black;
+  font-weight: bold;
+}
+
+.my-blogs .blog-type > * {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.my-blogs .blog-type > *:hover {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  transform: scale(1.05);
+}
+
+.my-blogs .blogs,
+.my-blogs p {
+  margin: 50px auto;
+}

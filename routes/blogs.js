@@ -6,6 +6,9 @@ const blogController = require("../controllers/blogController");
 /* GET - read all blogs. */
 router.get("/", blogController.blogs);
 
+/* GET - read all blogs for a specific user. */
+router.get("/user/:id", blogController.users_blogs_get);
+
 /* POST - create new blog */
 router.post("/blog", blogController.blog_post);
 

@@ -3,15 +3,27 @@ const Comment = require("../models/comment");
 const { body, validationResult } = require("express-validator");
 
 /* ---------- BLOG CONTROLLER FUNCTIONS ---------- */
-/* GET - read all blogs. */
+/* GET - read all published blogs. */
 exports.blogs = (req, res, next) => {
-  Blog.find()
+  Blog.find({ published: true })
     .populate("author", "-password")
     .exec((err, blogs) => {
       if (err) {
         return next(err);
       }
 
+      res.json({ blogs });
+    });
+};
+
+/* GET - read all blogs for a specific user. */
+exports.users_blogs_get = (req, res, next) => {
+  Blog.find({ author: req.params.id })
+    .populate("author", "-password")
+    .exec((err, blogs) => {
+      if (err) {
+        return next(err);
+      }
       res.json({ blogs });
     });
 };
