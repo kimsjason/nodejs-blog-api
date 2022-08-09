@@ -18,6 +18,12 @@ const CreateBlog = () => {
     setInput({ ...input, [event.target.name]: event.target.value });
   };
 
+  const handleButtonClick = (event) => {
+    event.target.id === "publish"
+      ? setInput({ ...input, published: true })
+      : setInput({ ...input, published: false });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch("http://localhost:9000/blogs/blog", {
@@ -77,9 +83,14 @@ const CreateBlog = () => {
 
         {errorMessages && <div className="errors">{getErrors("text")}</div>}
 
-        <button id="publish" type="submit">
-          Publish
-        </button>
+        <div className="buttons">
+          <button id="save" type="submit" onClick={handleButtonClick}>
+            Save
+          </button>
+          <button id="publish" onClick={handleButtonClick} type="submit">
+            Publish
+          </button>
+        </div>
       </form>
     </div>
   );
