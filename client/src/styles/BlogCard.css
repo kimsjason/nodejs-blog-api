@@ -8,6 +8,8 @@
   border-radius: 5px;
   background: white;
   cursor: pointer;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .blog-card:hover {
@@ -28,13 +30,42 @@
   width: 100%;
 }
 
+.blog-card .delete-blog {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transform: scale(0.5);
+  fill: #ddd;
+  z-index: 1;
+}
+
+.blog-card:hover .delete-blog:hover {
+  transform: scale(0.55);
+  fill: #333;
+}
+
 .blog-card .info {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  position: relative;
+  width: 100%;
   padding: 25px;
 }
 
 .blog-card .title {
   font-size: 2rem;
+  font-weight: 500;
+}
+
+.blog-card .text {
+  line-height: 1.5;
+}
+
+.blog-card .read-more {
+  z-index: 1;
+}
+
+.blog-card .read-more:hover {
+  font-weight: bold;
 }
