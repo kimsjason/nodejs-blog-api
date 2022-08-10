@@ -1,3 +1,89 @@
+*,
+*::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-size: 62.5%;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 50px;
+}
+
+div {
+  font-size: 1.4rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 300px;
+  margin: 50px auto;
+  text-align: left;
+}
+
+label {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+input {
+  height: 40px;
+}
+
+textarea {
+  height: 250px;
+  resize: none;
+  font: inherit;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+button {
+  height: 40px;
+  width: 150px;
+  margin: 15px 0;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.6rem;
+  font-weight: bold;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
+button:active {
+  box-shadow: 1px 1px 1px;
+}
+
+.errors {
+  color: red;
+}
+
 .App {
   text-align: center;
 }
@@ -34,5 +120,24 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  form {
+    width: 500px;
+  }
+
+  label {
+    font-size: 2rem;
+  }
+
+  input,
+  textarea {
+    font-size: 1.6rem;
   }
 }
