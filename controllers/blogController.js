@@ -1,6 +1,18 @@
 const Blog = require("../models/blog");
 const Comment = require("../models/comment");
 const { body, validationResult } = require("express-validator");
+const path = require("path");
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, "../public/images"));
+  },
+  filename: (req, file, cb) => {
+    const uniquePrefix = Date.now() + "-";
+    cb(null, uniquePrefix + file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
 /* ---------- BLOG CONTROLLER FUNCTIONS ---------- */
 /* GET - read all published blogs. */
@@ -46,6 +58,7 @@ exports.blog_get = (req, res, next) => {
 
 /* POST - create blog.  */
 exports.blog_post = [
+  upload.single("image"),
   // validate and sanitize fields
   body("title", "Please enter a valid title.")
     .isLength({ min: 3 })
@@ -76,6 +89,7 @@ exports.blog_post = [
       const newBlog = new Blog({
         title: req.body.title,
         text: req.body.text,
+        image: req.file.filename,
         author: req.body.author,
         published: req.body.published,
       });

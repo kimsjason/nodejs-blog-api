@@ -11,11 +11,16 @@ const CreateBlog = () => {
     text: "",
     published: false,
     comments: [],
+    image: "",
   });
   const [errorMessages, setErrorMessages] = useState([]);
 
   const handleInputChange = (event) => {
     setInput({ ...input, [event.target.name]: event.target.value });
+  };
+
+  const handleFileChange = (event) => {
+    setInput({ ...input, [event.target.name]: event.target.files[0] });
   };
 
   const handleButtonClick = (event) => {
@@ -26,12 +31,15 @@ const CreateBlog = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const form = new FormData();
+
+    for (let key in input) {
+      form.append(key, input[key]);
+    }
+
     fetch("http://localhost:9000/blogs/blog", {
       method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(input),
+      body: form,
     })
       .then((res) => res.json())
       .then((res) => {
@@ -60,7 +68,7 @@ const CreateBlog = () => {
   return (
     <div className="create-blog">
       <h1>New Blog</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label htmlFor="title">Title</label>
         <input
           id="title"
@@ -82,6 +90,16 @@ const CreateBlog = () => {
         />
 
         {errorMessages && <div className="errors">{getErrors("text")}</div>}
+
+        <label htmlFor="image-upload">Upload Image</label>
+        <input
+          id="image-upload"
+          type="file"
+          accept="image/*"
+          name="image"
+          onChange={handleFileChange}
+          required
+        />
 
         <div className="buttons">
           <button id="save" type="submit" onClick={handleButtonClick}>

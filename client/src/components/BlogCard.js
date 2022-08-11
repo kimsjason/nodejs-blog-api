@@ -20,7 +20,7 @@ const BlogCard = ({ blog }) => {
       className="blog-card"
       onClick={() => navigate(`/blogs/blog/${blog._id}`)}
     >
-      <img src={require("../assets/javascript.png")} alt="blog img" />
+      <img src={`/images/${blog.image}`} alt="blog img" />
       <div className="info">
         {auth.data.user && auth.data.user._id === blog.author._id ? (
           <DeleteIcon
