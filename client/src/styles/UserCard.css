@@ -1,0 +1,71 @@
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 275px;
+  margin-bottom: 25px;
+  padding: 25px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.user-card:hover {
+  transform: scale(1.05);
+  box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.user-card .profile {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.user-card .profile-avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-card .info {
+  line-height: 1.5;
+}
+
+.user-card .username {
+  font-weight: bold;
+}
+
+.user-card .recent-activity {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.user-card .blog-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-card .blogs {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-card .divider {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+}
+
+.user-card p {
+  font-size: 1.1rem;
+}
