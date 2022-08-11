@@ -1,15 +1,18 @@
-const { body, validationResult } = require("express-validator");
-const User = require("../models/user");
+const fs = require("fs");
 const bcryptjs = require("bcryptjs");
+const User = require("../models/user");
+const { body, validationResult } = require("express-validator");
 
 /* GET - read all users. */
 exports.users = (req, res, next) => {
-  User.find().exec((err, users) => {
-    if (err) {
-      return next(err);
-    }
-    res.json(users);
-  });
+  User.find()
+    .select(["-password", "-email", "-firstName", "-lastName"])
+    .exec((err, users) => {
+      if (err) {
+        return next(err);
+      }
+      res.json({ users });
+    });
 };
 
 /* GET - read user. */
@@ -97,16 +100,27 @@ exports.user_post = [
         if (err) {
           return next(err);
         }
-        // create a User object with escaped and trimmed data
-        const user = new User({
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          email: req.body.email,
-          username: req.body.username,
-          password: hashedPassword,
+        // generate random avatar
+        fs.readdir("./public/avatars", (err, files) => {
+          if (err) {
+            return next(err);
+          }
+          const randomAvatar = files[Math.floor(Math.random() * files.length)];
+
+          // create a User object with escaped and trimmed data
+          const user = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            username: req.body.username,
+            password: hashedPassword,
+            avatar: randomAvatar,
+          });
+          user.save();
+          res.json(user);
+
+          return files;
         });
-        user.save();
-        res.json(user);
       });
     }
   },
