@@ -13,7 +13,11 @@ const UserCard = ({ user, blogs }) => {
       onClick={() => navigate(`/users/user/${user._id}`)}
     >
       <div className="profile">
-        <img src="#" className="profile-avatar" alt="profile avatar" />
+        <img
+          src={`/avatars/${user.avatar}`}
+          className="profile-avatar"
+          alt="profile avatar"
+        />
         <div className="info">
           <div className="username">{user.username}</div>
         </div>

@@ -26,10 +26,12 @@
 }
 
 .user-card .profile-avatar {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
+  width: 75px;
+  height: 75px;
+  padding: 10px;
   border-radius: 50%;
+  border: 1px solid #ccc;
+  object-fit: cover;
 }
 
 .user-card .info {
@@ -53,12 +55,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-.user-card .blogs {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
 }
 
 .user-card .divider {
