@@ -1,0 +1,9 @@
+.section-users,
+.users {
+  margin: 50px auto;
+}
+
+.section-users .users {
+  display: flex;
+  gap: 25px;
+}

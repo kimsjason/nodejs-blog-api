@@ -9,23 +9,12 @@ import Blogs from "./components/Blogs";
 import Blog from "./components/Blog";
 import MyBlogs from "./components/MyBlogs";
 import CreateBlog from "./components/CreateBlog";
+import Users from "./components/Users";
 
 function App() {
-  const [users, setUsers] = useState([]);
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    // fetch users from database
-    const fetchUsers = async () => {
-      await fetch("http://localhost:9000/users")
-        .then((res) => res.json())
-        .then((res) => {
-          const users = res.users;
-          setUsers(users);
-        })
-        .catch((err) => console.error("Error: ", err));
-    };
-
     // fetch blogs from database
     const fetchBlogs = async () => {
       await fetch("http://localhost:9000/blogs")
@@ -37,7 +26,6 @@ function App() {
         .catch((err) => console.error("Error: ", err));
     };
 
-    fetchUsers();
     fetchBlogs();
   }, []);
 
@@ -66,6 +54,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/users" element={<Users blogs={blogs} />} />
         </Routes>
       </BrowserRouter>
     </div>
