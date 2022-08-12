@@ -54,10 +54,11 @@ textarea {
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: 10px;
 }
 
-button {
+button,
+.button {
   height: 40px;
   width: 150px;
   margin: 15px 0;
@@ -70,13 +71,14 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover,
+.button:hover {
   background: white;
   color: black;
   border: 1px solid black;
 }
 
-button:active {
+button:active .button:active {
   box-shadow: 1px 1px 1px;
 }
 

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
 import Nav from "./components/Nav";
+import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Blogs from "./components/Blogs";
@@ -10,6 +10,7 @@ import Blog from "./components/Blog";
 import MyBlogs from "./components/MyBlogs";
 import CreateBlog from "./components/CreateBlog";
 import Users from "./components/Users";
+import "./App.css";
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -34,6 +35,7 @@ function App() {
       <Nav />
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Home blogs={blogs} />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/blogs" element={<Blogs blogs={blogs} />} />

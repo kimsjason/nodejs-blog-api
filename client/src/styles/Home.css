@@ -1,0 +1,66 @@
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #e9eee8;
+}
+
+.homepage .brand {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 250px 0;
+  background: #e9eee8;
+  cursor: pointer;
+}
+
+.homepage .logo {
+  width: 78px;
+}
+
+.homepage h1 {
+  font-family: "Shrikhand";
+  font-size: 3rem;
+  max-width: 150px;
+  margin: 0;
+}
+
+.homepage .highlights {
+  padding: 50px 0;
+  width: 100%;
+  background: white;
+}
+
+.homepage .featured-blogs h2 {
+  margin-bottom: 50px;
+}
+
+.homepage .blogs {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.homepage .actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  padding: 50px 25px;
+}
+
+.homepage .start-reading,
+.homepage .start-writing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.homepage .actions a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
