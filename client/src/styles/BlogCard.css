@@ -26,8 +26,42 @@
   background: rgba(0, 0, 0, 0.1);
 }
 
+.blog-card .image-container {
+  position: relative;
+}
+
 .blog-card img {
   width: 100%;
+}
+
+.blog-card button.publish,
+.blog-card button.unpublish {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin: 0;
+  height: 25px;
+  width: 75px;
+  font-size: 1.2rem;
+  z-index: 1;
+}
+
+.blog-card button.publish:hover,
+.blog-card button.unpublish:hover {
+  background: white;
+  color: black;
+}
+
+.blog-card button.publish:active,
+.blog-card button.unpublish:active {
+  box-shadow: 1px 1px 1px;
+}
+
+.blog-card button.publish {
+  background: green;
+}
+.blog-card button.unpublish {
+  background: rgb(225, 0, 0);
 }
 
 .blog-card .delete-blog {

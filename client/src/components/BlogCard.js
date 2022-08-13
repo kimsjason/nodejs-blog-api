@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../contexts/AuthContext";
 import { ReactComponent as DeleteIcon } from "../assets/delete.svg";
+import { publishBlog } from "../helpers/helper";
 import "../styles/BlogCard.css";
 
 const BlogCard = ({ blog }) => {
@@ -20,7 +21,22 @@ const BlogCard = ({ blog }) => {
       className="blog-card"
       onClick={() => navigate(`/blogs/blog/${blog._id}`)}
     >
-      <img src={`/images/${blog.image}`} alt="blog img" />
+      <div className="image-container">
+        <img src={`/images/${blog.image}`} alt="blog img" />
+        {auth.data.user && auth.data.user._id === blog.author._id ? (
+          <button
+            className={blog.published ? "unpublish" : "publish"}
+            onClick={(event) => {
+              event.stopPropagation();
+              publishBlog(blog);
+              navigate(`/blogs/blog/${blog._id}`);
+            }}
+          >
+            {blog.published ? "Unpublish" : "Publish"}
+          </button>
+        ) : null}
+      </div>
+
       <div className="info">
         {auth.data.user && auth.data.user._id === blog.author._id ? (
           <DeleteIcon

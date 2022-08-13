@@ -30,3 +30,15 @@ export const getTimeAgo = (isoDate) => {
 
   return timeAgo;
 };
+
+export const publishBlog = (blog) => {
+  blog.published = !blog.published;
+
+  fetch(`http://localhost:9000/blogs/blog/${blog._id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(blog),
+  });
+};
