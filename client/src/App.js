@@ -10,6 +10,7 @@ import Blog from "./components/Blog";
 import MyBlogs from "./components/MyBlogs";
 import CreateBlog from "./components/CreateBlog";
 import Users from "./components/Users";
+import User from "./components/User";
 import "./App.css";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
             }
           />
           <Route path="/users" element={<Users blogs={blogs} />} />
+          <Route path="/users/user/:id" element={<User blogs={blogs} />} />
         </Routes>
       </BrowserRouter>
     </div>

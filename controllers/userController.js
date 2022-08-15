@@ -24,7 +24,7 @@ exports.user_get = (req, res, next) => {
     if (!user) {
       res.json({ error: "User doesn't exist" });
     } else {
-      res.json(user);
+      res.json({ user });
     }
   });
 };

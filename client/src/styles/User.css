@@ -1,0 +1,14 @@
+.user {
+  margin: 100px;
+}
+
+.user .user-avatar {
+  width: 125px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.user .blogs {
+  margin: 0 auto;
+}
