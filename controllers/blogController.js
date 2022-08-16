@@ -18,7 +18,7 @@ const upload = multer({ storage: storage });
 /* GET - read all published blogs. */
 exports.blogs = (req, res, next) => {
   Blog.find({ published: true })
-    .populate("author", "-password")
+    .populate("author", ["-password", "-email", "-firstName", "-lastName"])
     .exec((err, blogs) => {
       if (err) {
         return next(err);
@@ -106,24 +106,47 @@ exports.blog_post = [
 ];
 
 /* PUT - update blog. */
-exports.blog_put = (req, res, next) => {
-  Blog.findByIdAndUpdate(req.params.id, {
-    title: req.body.title,
-    text: req.body.text,
-    author: req.body.author,
-    published: req.body.published,
-  }).exec((err, blog) => {
-    if (err) {
-      return next(err);
-    }
+exports.blog_put = [
+  upload.single("image"),
+  body("title", "Please enter a valid title.")
+    .isLength({ min: 3 })
+    .withMessage("Title must be at least 3 characters.")
+    .trim()
+    .escape(),
+  body("text")
+    .isLength({ min: 100 })
+    .withMessage("Blog must be at least 100 characters.")
+    .trim()
+    .escape(),
 
-    if (!blog) {
-      res.json({ error: "Blog does not exist." });
+  (req, res, next) => {
+    // extract validation errors from a request
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      // there are errors
+      res.json({ errors });
     } else {
-      res.json({ blog });
+      Blog.findByIdAndUpdate(req.params.id, {
+        title: req.body.title,
+        text: req.body.text,
+        image: req.file ? req.file.filename : req.body.image,
+        author: req.body.author,
+        published: req.body.published,
+      }).exec((err, blog) => {
+        if (err) {
+          return next(err);
+        }
+
+        if (!blog) {
+          res.json({ error: "Blog does not exist." });
+        } else {
+          res.json({ blog });
+        }
+      });
     }
-  });
-};
+  },
+];
 
 /* DELETE - delete blog. */
 exports.blog_delete = (req, res, next) => {
