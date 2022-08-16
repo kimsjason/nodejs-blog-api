@@ -24,16 +24,27 @@ const BlogCard = ({ blog }) => {
       <div className="image-container">
         <img src={`/images/${blog.image}`} alt="blog img" />
         {auth.data.user && auth.data.user._id === blog.author._id ? (
-          <button
-            className={blog.published ? "unpublish" : "publish"}
-            onClick={(event) => {
-              event.stopPropagation();
-              publishBlog(blog);
-              navigate(`/blogs/blog/${blog._id}`);
-            }}
-          >
-            {blog.published ? "Unpublish" : "Publish"}
-          </button>
+          <div className="buttons">
+            <button
+              className="edit-blog"
+              onClick={(event) => {
+                event.stopPropagation();
+                navigate(`/blogs/edit-blog/${blog._id}`);
+              }}
+            >
+              Edit Blog
+            </button>
+            <button
+              className={blog.published ? "unpublish" : "publish"}
+              onClick={(event) => {
+                event.stopPropagation();
+                publishBlog(blog);
+                navigate(`/blogs/blog/${blog._id}`);
+              }}
+            >
+              {blog.published ? "Unpublish" : "Publish"}
+            </button>
+          </div>
         ) : null}
       </div>
 

@@ -57,6 +57,14 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="blogs/edit-blog/:id"
+            element={
+              <PrivateRoute>
+                <CreateBlog />
+              </PrivateRoute>
+            }
+          />
           <Route path="/users" element={<Users blogs={blogs} />} />
           <Route path="/users/user/:id" element={<User blogs={blogs} />} />
         </Routes>
