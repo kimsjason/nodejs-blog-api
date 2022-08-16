@@ -35,14 +35,14 @@ const Nav = () => {
           <li className="blogs">
             <a href="/blogs">Blogs</a>
           </li>
-          <li className="bloggers">
-            <a href="/bloggers">Bloggers</a>
+          <li className="users-link">
+            <a href="/users">Users</a>
           </li>
         </ul>
         {auth.data.isAuthenticated ? (
           <ul className="your-account">
-            <li className="create-blog">
-              <a href="/blogs/create-blog">Create Blog</a>
+            <li className="blog-form">
+              <a href="/blogs/blog-form">New Blog</a>
             </li>
             <li className="my-blogs">
               <a href="/blogs/my-blogs">My Blogs</a>

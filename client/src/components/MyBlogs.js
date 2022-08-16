@@ -88,7 +88,7 @@ const MyBlogs = () => {
         </div>
       ) : (
         <p>
-          No blogs to show. Create a <a href="/blogs/create-blog">new blog</a>.
+          No blogs to show. Create a <a href="/blogs/blog-form">new blog</a>.
         </p>
       )}
     </div>

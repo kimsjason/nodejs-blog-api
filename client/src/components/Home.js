@@ -45,7 +45,7 @@ const Home = ({ blogs }) => {
         <div className="start-writing">
           <h2>Start writing.</h2>
           <p>Write and publish your blog within seconds.</p>
-          <a href="/blogs/create-blog" className="blog-generator button">
+          <a href="/blogs/blog-form" className="blog-generator button">
             Blog Generator
           </a>
         </div>

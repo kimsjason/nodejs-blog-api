@@ -8,7 +8,7 @@ import Login from "./components/Login";
 import Blogs from "./components/Blogs";
 import Blog from "./components/Blog";
 import MyBlogs from "./components/MyBlogs";
-import CreateBlog from "./components/CreateBlog";
+import BlogForm from "./components/BlogForm";
 import Users from "./components/Users";
 import User from "./components/User";
 import "./App.css";
@@ -50,10 +50,10 @@ function App() {
             }
           />
           <Route
-            path="/blogs/create-blog"
+            path="/blogs/blog-form"
             element={
               <PrivateRoute>
-                <CreateBlog />
+                <BlogForm />
               </PrivateRoute>
             }
           />
@@ -61,7 +61,7 @@ function App() {
             path="blogs/edit-blog/:id"
             element={
               <PrivateRoute>
-                <CreateBlog />
+                <BlogForm />
               </PrivateRoute>
             }
           />
