@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../styles/Blog.css";
 
 const Blog = () => {
@@ -30,9 +30,17 @@ const Blog = () => {
         {new Date(blog.createdAt).toLocaleDateString()}
       </p>
       <p className="author">
-        by {`${blog.author.firstName} ${blog.author.lastName}`}
+        by{" "}
+        <Link
+          to={`/users/user/${blog.author._id}`}
+        >{`${blog.author.firstName} ${blog.author.lastName}`}</Link>
       </p>
-      <h1>{blog.title}</h1>
+      <h1 className="title">{blog.title}</h1>
+      <img
+        src={`/images/${blog.image}`}
+        className="main-image"
+        alt="main blog img"
+      />
       <div className="text">{blog.text}</div>
     </div>
   );

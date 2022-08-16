@@ -2,17 +2,38 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin: 50px;
+  width: 85%;
+  max-width: 1000px;
+  margin: 50px auto;
   text-align: left;
 }
 
-.blog .text {
-  white-space: pre-wrap;
-  line-height: 1.5;
+.blog .author a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+.blog .author a:hover {
+  text-decoration: underline;
 }
 
-@media only screen and (min-width: 640px) {
-  .blog {
-    margin: 50px 100px;
-  }
+.blog .title {
+  margin: 15px 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.blog .main-image {
+  width: 100%;
+  max-width: 550px;
+  max-height: 350px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.blog .text {
+  margin: 25px 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.5;
 }
