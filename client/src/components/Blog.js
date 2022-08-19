@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import Comments from "./Comments";
 import "../styles/Blog.css";
 
 const Blog = () => {
@@ -7,6 +8,7 @@ const Blog = () => {
   const [blog, setBlog] = useState({
     title: "",
     author: "",
+    image: "",
     text: "",
     published: "",
     comments: [],
@@ -42,6 +44,7 @@ const Blog = () => {
         alt="main blog img"
       />
       <div className="text">{blog.text}</div>
+      <Comments blog={blog} />
     </div>
   );
 };
