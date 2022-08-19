@@ -1,0 +1,44 @@
+.comment {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  padding: 15px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.comment .user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.comment .avatar {
+  width: 40px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+}
+
+.comment a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.comment a:hover {
+  text-decoration: underline;
+}
+
+.comment div.text {
+  margin: 0;
+}
+
+.comment .created-at {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 1rem;
+}
