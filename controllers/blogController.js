@@ -44,6 +44,7 @@ exports.users_blogs_get = (req, res, next) => {
 exports.blog_get = (req, res, next) => {
   Blog.findById(req.params.id)
     .populate("author", "-password")
+    .populate("comments")
     .exec((err, blog) => {
       if (err) {
         return next(err);
@@ -211,31 +212,37 @@ exports.comment_get = (req, res, next) => {
 };
 
 /* POST - create comment.  */
-exports.comment_post = (req, res, next) => {
-  const newComment = new Comment({
-    text: req.body.text,
-    author: req.body.author,
-  });
-  Blog.findByIdAndUpdate(req.params.id, {
-    $push: { comments: newComment._id },
-  }).exec((err, blog) => {
-    if (err) {
-      return next(err);
-    }
+exports.comment_post = [
+  // validate and sanitize fields
+  body("text").trim().escape(),
 
-    if (!blog) {
-      res.json({ error: "Blog does not exist." });
-    } else {
-      newComment.save((err, comment) => {
-        if (err) {
-          return next(err);
-        }
+  (req, res, next) => {
+    const newComment = new Comment({
+      text: req.body.text,
+      author: req.body.author,
+    });
 
-        res.json({ comment });
-      });
-    }
-  });
-};
+    Blog.findByIdAndUpdate(req.params.id, {
+      $push: { comments: newComment },
+    }).exec((err, blog) => {
+      if (err) {
+        return next(err);
+      }
+
+      if (!blog) {
+        res.json({ error: "Blog does not exist." });
+      } else {
+        newComment.save((err, comment) => {
+          if (err) {
+            return next(err);
+          }
+
+          res.json({ comment });
+        });
+      }
+    });
+  },
+];
 
 /* PUT - update comment. */
 exports.comment_put = (req, res, next) => {
