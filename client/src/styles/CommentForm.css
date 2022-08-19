@@ -1,0 +1,70 @@
+.comment-form {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 25px 0;
+  padding: 15px;
+}
+
+.comment-form form {
+  width: 100%;
+  margin: 0;
+}
+
+.comment-form .user {
+  margin: 0;
+}
+
+.comment-form .user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.comment-form a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.comment-form a:hover {
+  text-decoration: underline;
+}
+
+.comment-form .avatar {
+  width: 40px;
+  padding: 5px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+
+.comment-form textarea {
+  border: none;
+  height: 50px;
+  color: #333;
+}
+
+.comment-form textarea:focus {
+  outline: none;
+  height: 100px;
+  transition: 0.2s ease-in;
+}
+
+.comment-form #cancel {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.comment-form button {
+  height: 30px;
+  width: 90px;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+@media only screen and (min-width: 440px) {
+  .comment-form .buttons {
+    margin-left: auto;
+  }
+}
