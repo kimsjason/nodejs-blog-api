@@ -24,7 +24,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: 300px;
+  width: 275px;
   margin: 50px auto;
   text-align: left;
 }
