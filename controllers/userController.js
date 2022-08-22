@@ -17,16 +17,18 @@ exports.users = (req, res, next) => {
 
 /* GET - read user. */
 exports.user_get = (req, res, next) => {
-  User.findById(req.params.id).exec((err, user) => {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      res.json({ error: "User doesn't exist" });
-    } else {
-      res.json({ user });
-    }
-  });
+  User.findById(req.params.id)
+    .select(["-password", "-email", "-firstName", "-lastName"])
+    .exec((err, user) => {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        res.json({ error: "User doesn't exist" });
+      } else {
+        res.json({ user });
+      }
+    });
 };
 
 /* POST - create user.  */
