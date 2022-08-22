@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../contexts/AuthContext";
 import { ReactComponent as DeleteIcon } from "../assets/delete.svg";
-import { publishBlog } from "../helpers/helper";
+import { decodeHTML, publishBlog } from "../helpers/helper";
 import "../styles/BlogCard.css";
 
 const BlogCard = ({ blog }) => {
@@ -64,11 +64,9 @@ const BlogCard = ({ blog }) => {
         <div className="created-at">
           {new Date(blog.createdAt).toLocaleDateString()}
         </div>
-        <div className="title">{blog.title}</div>
-        <div className="author">
-          by {`${blog.author.firstName} ${blog.author.lastName}`}
-        </div>
-        <div className="text">{blog.text.slice(0, 100)}...</div>
+        <div className="title">{decodeHTML(blog.title)}</div>
+        <div className="author">by {`${blog.author.username}`}</div>
+        <div className="text">{decodeHTML(blog.text.slice(0, 100))}...</div>
         <a href={`/blogs/blog/${blog._id}`} className="read-more">
           Read More
         </a>

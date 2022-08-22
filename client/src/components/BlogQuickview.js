@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { getTimeAgo } from "../helpers/helper";
+import { decodeHTML, getTimeAgo } from "../helpers/helper";
 import "../styles/BlogQuickview.css";
 
 const BlogQuickview = ({ blog }) => {
@@ -17,9 +17,11 @@ const BlogQuickview = ({ blog }) => {
     >
       <p className="date-posted">{timeAgo}</p>
       <p className="title">
-        {blog.title.length > 25 ? blog.title.slice(0, 20) + "..." : blog.title}
+        {blog.title.length > 25
+          ? decodeHTML(blog.title.slice(0, 20)) + "..."
+          : decodeHTML(blog.title)}
       </p>
-      <p className="text">{blog.text.slice(0, 50)}...</p>
+      <p className="text">{decodeHTML(blog.text.slice(0, 50))}...</p>
     </div>
   );
 };

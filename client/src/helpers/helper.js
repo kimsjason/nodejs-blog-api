@@ -42,3 +42,8 @@ export const publishBlog = (blog) => {
     body: JSON.stringify(blog),
   });
 };
+
+export const decodeHTML = (input) => {
+  var doc = new DOMParser().parseFromString(input, "text/html");
+  return doc.documentElement.textContent;
+};

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTimeAgo } from "../helpers/helper";
+import { decodeHTML, getTimeAgo } from "../helpers/helper";
 import "../styles/Comment.css";
 
 const Comment = ({ comment }) => {
@@ -22,7 +22,7 @@ const Comment = ({ comment }) => {
           <p className="user">{user.username}</p>
         </a>
       </div>
-      <div className="text"> {comment.text}</div>
+      <div className="text"> {decodeHTML(comment.text)}</div>
       <div className="created-at">{getTimeAgo(comment.createdAt)}</div>
     </div>
   );

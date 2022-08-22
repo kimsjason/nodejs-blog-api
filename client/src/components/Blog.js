@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Comments from "./Comments";
 import "../styles/Blog.css";
+import { decodeHTML } from "../helpers/helper";
 
 const Blog = () => {
   const blogID = useParams().id;
@@ -37,13 +38,13 @@ const Blog = () => {
           to={`/users/user/${blog.author._id}`}
         >{`${blog.author.firstName} ${blog.author.lastName}`}</Link>
       </p>
-      <h1 className="title">{blog.title}</h1>
+      <h1 className="title">{decodeHTML(blog.title)}</h1>
       <img
         src={`/images/${blog.image}`}
         className="main-image"
         alt="main blog img"
       />
-      <div className="text">{blog.text}</div>
+      <div className="text">{decodeHTML(blog.text)}</div>
       <Comments blog={blog} />
     </div>
   );
