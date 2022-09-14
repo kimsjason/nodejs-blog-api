@@ -40,7 +40,7 @@ const Blog = () => {
       </p>
       <h1 className="title">{decodeHTML(blog.title)}</h1>
       <img
-        src={`/images/${blog.image}`}
+        src={`http://localhost:9000/images/${blog.image}`}
         className="main-image"
         alt="main blog img"
       />

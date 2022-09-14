@@ -14,7 +14,7 @@ const Comment = ({ comment }) => {
     <div className="comment">
       <div className="user">
         <img
-          src={`/avatars/${user.avatar}`}
+          src={`http://localhost:9000/avatars/${user.avatar}`}
           className="avatar"
           alt="user avatar"
         />

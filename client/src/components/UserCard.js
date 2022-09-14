@@ -14,7 +14,7 @@ const UserCard = ({ user, blogs }) => {
     >
       <div className="profile">
         <img
-          src={`/avatars/${user.avatar}`}
+          src={`http://localhost:9000/avatars/${user.avatar}`}
           className="profile-avatar"
           alt="profile avatar"
         />

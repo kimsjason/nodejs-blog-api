@@ -28,7 +28,7 @@ const CommentForm = ({ blog }) => {
       <form>
         <div className="user">
           <img
-            src={`/avatars/${auth.data.user.avatar}`}
+            src={`http://localhost:9000/avatars/${auth.data.user.avatar}`}
             className="avatar"
             alt="user avatar"
           />

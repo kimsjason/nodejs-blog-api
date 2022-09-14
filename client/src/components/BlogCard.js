@@ -22,7 +22,10 @@ const BlogCard = ({ blog }) => {
       onClick={() => navigate(`/blogs/blog/${blog._id}`)}
     >
       <div className="image-container">
-        <img src={`/images/${blog.image}`} alt="blog img" />
+        <img
+          src={`http://localhost:9000/images/${blog.image}`}
+          alt="blog img"
+        />
         {auth.data.user && auth.data.user._id === blog.author._id ? (
           <div className="buttons">
             <button
