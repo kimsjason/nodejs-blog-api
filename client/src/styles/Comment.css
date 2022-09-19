@@ -7,6 +7,20 @@
   border-bottom: 1px solid #ccc;
 }
 
+.comment .delete-comment {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transform: scale(0.5);
+  fill: #ddd;
+  cursor: pointer;
+}
+
+.comment:hover .delete-comment:hover {
+  transform: scale(0.55);
+  fill: #333;
+}
+
 .comment .user {
   display: flex;
   flex-direction: column;
