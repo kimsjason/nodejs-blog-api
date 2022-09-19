@@ -219,6 +219,7 @@ exports.comment_post = [
   (req, res, next) => {
     const newComment = new Comment({
       text: req.body.text,
+      blog: req.body.blog,
       author: req.body.author,
     });
 
@@ -274,7 +275,9 @@ exports.comment_put = (req, res, next) => {
 
 /* DELETE - delete comment. */
 exports.comment_delete = (req, res, next) => {
-  Blog.findById(req.params.id1).exec((err, blog) => {
+  Blog.findByIdAndUpdate(req.params.id1, {
+    $pull: { comments: req.params.id2 },
+  }).exec((err, blog) => {
     if (err) {
       return next(err);
     }

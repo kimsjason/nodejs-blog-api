@@ -12,7 +12,11 @@ const CommentForm = ({ blog }) => {
 
   const handleSubmitComment = (event) => {
     event.preventDefault();
-    const newComment = { author: auth.data.user._id, text: comment };
+    const newComment = {
+      blog: blog._id,
+      author: auth.data.user._id,
+      text: comment,
+    };
 
     fetch(`http://localhost:9000/blogs/blog/${blog._id}/comment`, {
       method: "POST",
