@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../contexts/AuthContext";
+import "../styles/BlogForm.css";
 
 const CreateBlog = () => {
   const { auth } = useContext(authContext);
@@ -78,6 +79,18 @@ const CreateBlog = () => {
       });
   };
 
+  const generateBlog = (prompt) => {
+    fetch(`http://localhost:9000/blogs/openai-blog`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: prompt }),
+    })
+      .then((res) => res.json())
+      .then((res) => setInput({ ...input, text: res.text }));
+  };
+
   // filter for field specific validation errors
   const getErrors = (inputName) => {
     return errorMessages
@@ -92,7 +105,7 @@ const CreateBlog = () => {
   };
 
   return (
-    <div className="create-blog">
+    <div className="blog-form">
       <h1>{id ? "Edit Blog" : "New Blog"}</h1>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label htmlFor="title">Title</label>
@@ -100,6 +113,7 @@ const CreateBlog = () => {
           id="title"
           type="text"
           name="title"
+          placeholder="Write a descriptive title..."
           value={input.title}
           onChange={handleInputChange}
           required
@@ -107,11 +121,49 @@ const CreateBlog = () => {
 
         {errorMessages && <div className="errors">{getErrors("title")}</div>}
 
+        <div className="generate-blog">
+          <div
+            className="toggle-tips"
+            onClick={() =>
+              document
+                .querySelector(".generate-blog .tips")
+                .classList.toggle("hidden")
+            }
+          >
+            Blog Generation Tips
+          </div>
+          <div className="tips hidden">
+            <ul>
+              <li>
+                Writing a more descriptive title will typically generate a
+                longer and more interesting blog. You can always edit the title
+                or blog text afterward.
+              </li>
+              <li>
+                It may take a few seconds for the blog to load in the textbox.
+              </li>
+              <li>
+                Clicking "Generate Blog" will overwrite any blog text, including
+                previously auto-generated text. Make sure to save your work.
+              </li>
+            </ul>
+          </div>
+
+          <button
+            onClick={(event) => {
+              generateBlog(input.title);
+            }}
+            type="button"
+          >
+            Generate Blog
+          </button>
+        </div>
         <label htmlFor="text">Text</label>
         <textarea
           id="text"
           type="text"
           name="text"
+          placeholder="Your blog goes here..."
           value={input.text}
           onChange={handleInputChange}
           required

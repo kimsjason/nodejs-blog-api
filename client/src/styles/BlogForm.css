@@ -1,0 +1,23 @@
+.blog-form .toggle-tips {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.blog-form .toggle-tips:hover {
+  text-decoration: underline;
+}
+
+.blog-form .tips {
+  padding: 15px;
+  padding-right: 0;
+}
+
+.blog-form .tips ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.blog-form .hidden {
+  display: none;
+}

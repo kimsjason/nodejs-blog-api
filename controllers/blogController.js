@@ -13,6 +13,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
+const openai = require("../config/openai-config");
 
 /* ---------- BLOG CONTROLLER FUNCTIONS ---------- */
 /* GET - read all published blogs. */
@@ -55,6 +56,22 @@ exports.blog_get = (req, res, next) => {
         res.json({ blog });
       }
     });
+};
+
+/* POST - generate a blog with OpenAI's GPT-3 model. */
+exports.openai_blog_post = async (req, res, next) => {
+  const query = {
+    model: "text-curie-001",
+    prompt: `Generate a long blog based on the title: ${req.body.prompt}`,
+    temperature: 0.7,
+    max_tokens: 1000,
+    top_p: 1.0,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+  };
+
+  const completion = await openai.createCompletion(query);
+  res.json({ text: completion.data.choices[0].text.trim() });
 };
 
 /* POST - create blog.  */
