@@ -21,7 +21,7 @@ const User = ({ blogs }) => {
 
   useEffect(() => {
     const fetchUser = () => {
-      fetch(`http://localhost:9000/users/user/${userID}`, { method: "GET" })
+      fetch(`/api/users/user/${userID}`, { method: "GET" })
         .then((res) => res.json())
         .then((res) => setUser(res.user));
     };
@@ -33,7 +33,7 @@ const User = ({ blogs }) => {
     <div className="user">
       <div className="info">
         <img
-          src={`http://localhost:9000/avatars/${user.avatar}`}
+          src={`/api/avatars/${user.avatar}`}
           className="user-avatar"
           alt="user avatar"
         />

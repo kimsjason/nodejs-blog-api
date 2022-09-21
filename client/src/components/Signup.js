@@ -17,7 +17,7 @@ const Signup = () => {
   };
 
   const handleSubmit = (event) => {
-    fetch("http://localhost:9000/users/user", {
+    fetch("/api/users/user", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

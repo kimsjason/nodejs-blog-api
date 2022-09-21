@@ -22,7 +22,7 @@ const MyBlogs = () => {
   useEffect(() => {
     // fetch user's blogs from database
     const fetchMyBlogs = async () => {
-      await fetch(`http://localhost:9000/blogs/user/${auth.data.user._id}`)
+      await fetch(`/api/blogs/user/${auth.data.user._id}`)
         .then((res) => res.json())
         .then((res) => {
           setMyBlogs({

@@ -34,7 +34,7 @@ export const getTimeAgo = (isoDate) => {
 export const publishBlog = (blog) => {
   blog.published = !blog.published;
 
-  fetch(`http://localhost:9000/blogs/blog/${blog._id}`, {
+  fetch(`/api/blogs/blog/${blog._id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

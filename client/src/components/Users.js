@@ -17,7 +17,7 @@ const Users = ({ blogs }) => {
   useEffect(() => {
     // fetch users from database
     const fetchUsers = async () => {
-      await fetch("http://localhost:9000/users")
+      await fetch("/api/users")
         .then((res) => res.json())
         .then((res) => {
           const users = res.users;

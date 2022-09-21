@@ -9,13 +9,13 @@ const Comment = ({ comment }) => {
   const { auth } = useContext(authContext);
 
   useEffect(() => {
-    fetch(`http://localhost:9000/users/user/${comment.author}`)
+    fetch(`/api/users/user/${comment.author}`)
       .then((res) => res.json())
       .then((res) => setUser(res.user));
   }, []);
 
   const deleteComment = (blog, comment) => {
-    fetch(`http://localhost:9000/blogs/blog/${blog}/comment/${comment}`, {
+    fetch(`/api/blogs/blog/${blog}/comment/${comment}`, {
       method: "DELETE",
     }).catch((err) => console.err(err));
   };
@@ -34,7 +34,7 @@ const Comment = ({ comment }) => {
       ) : null}
       <div className="user">
         <img
-          src={`http://localhost:9000/avatars/${user.avatar}`}
+          src={`/api/avatars/${user.avatar}`}
           className="avatar"
           alt="user avatar"
         />

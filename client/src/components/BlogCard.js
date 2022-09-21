@@ -11,7 +11,7 @@ const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
 
   const deleteBlog = (blog) => {
-    fetch(`http://localhost:9000/blogs/blog/${blog}`, {
+    fetch(`/api/blogs/blog/${blog}`, {
       method: "DELETE",
     }).catch((err) => console.err(err));
   };
@@ -22,10 +22,7 @@ const BlogCard = ({ blog }) => {
       onClick={() => navigate(`/blogs/blog/${blog._id}`)}
     >
       <div className="image-container">
-        <img
-          src={`http://localhost:9000/images/${blog.image}`}
-          alt="blog img"
-        />
+        <img src={`/api/images/${blog.image}`} alt="blog img" />
         {auth.data.user && auth.data.user._id === blog.author._id ? (
           <div className="buttons">
             <button

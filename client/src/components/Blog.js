@@ -18,7 +18,7 @@ const Blog = () => {
   useEffect(() => {
     // fetch blog from database
     const fetchBlog = async () => {
-      await fetch(`http://localhost:9000/blogs/blog/${blogID}`)
+      await fetch(`/api/blogs/blog/${blogID}`)
         .then((res) => res.json())
         .then((res) => setBlog(res.blog))
         .catch((err) => console.error("Error: ", err));
@@ -40,7 +40,7 @@ const Blog = () => {
       </p>
       <h1 className="title">{decodeHTML(blog.title)}</h1>
       <img
-        src={`http://localhost:9000/images/${blog.image}`}
+        src={`/api/images/${blog.image}`}
         className="main-image"
         alt="main blog img"
       />

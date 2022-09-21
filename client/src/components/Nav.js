@@ -7,7 +7,7 @@ const Nav = () => {
   const { auth, setAuth } = useContext(authContext);
 
   const logout = () => {
-    fetch("http://localhost:9000/logout", {
+    fetch("/api/logout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

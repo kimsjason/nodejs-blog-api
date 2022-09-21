@@ -21,7 +21,7 @@ const CreateBlog = () => {
     // if id exists in url parameters, user edits an existing blog
     // otherwise, user creates a new blog
     if (id) {
-      fetch(`http://localhost:9000/blogs/blog/${id}`)
+      fetch(`/api/blogs/blog/${id}`)
         .then((res) => res.json())
         .then((res) => {
           const blog = res.blog;
@@ -64,7 +64,7 @@ const CreateBlog = () => {
       form.append(key, input[key]);
     }
 
-    fetch(`http://localhost:9000/blogs/blog/${id ? id : ""}`, {
+    fetch(`/api/blogs/blog/${id ? id : ""}`, {
       method: id ? "PUT" : "POST",
       body: form,
     })
@@ -80,7 +80,7 @@ const CreateBlog = () => {
   };
 
   const generateBlog = (prompt) => {
-    fetch(`http://localhost:9000/blogs/openai-blog`, {
+    fetch(`/api/blogs/openai-blog`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

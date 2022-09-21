@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     // fetch blogs from database
     const fetchBlogs = async () => {
-      await fetch("http://localhost:9000/blogs")
+      await fetch("/api/blogs")
         .then((res) => res.json())
         .then((res) => {
           const blogs = res.blogs;

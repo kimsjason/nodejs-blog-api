@@ -18,7 +18,7 @@ const CommentForm = ({ blog }) => {
       text: comment,
     };
 
-    fetch(`http://localhost:9000/blogs/blog/${blog._id}/comment`, {
+    fetch(`/api/blogs/blog/${blog._id}/comment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newComment),
@@ -32,7 +32,7 @@ const CommentForm = ({ blog }) => {
       <form>
         <div className="user">
           <img
-            src={`http://localhost:9000/avatars/${auth.data.user.avatar}`}
+            src={`/api/avatars/${auth.data.user.avatar}`}
             className="avatar"
             alt="user avatar"
           />
