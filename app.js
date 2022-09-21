@@ -71,19 +71,19 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.resolve(__dirname, "./client/public")));
 app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "./client/build")));
 app.use("/api", express.static(path.join(__dirname, "public")));
 
 app.use("/api", indexRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/blogs", blogsRouter);
 
-app.get("*", function (req, res) {
+app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build", "index.html"));
 });
 
