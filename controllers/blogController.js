@@ -1,19 +1,25 @@
 const Blog = require("../models/blog");
 const Comment = require("../models/comment");
 const { body, validationResult } = require("express-validator");
-const path = require("path");
-const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../public/images"));
-  },
-  filename: (req, file, cb) => {
-    const uniquePrefix = Date.now() + "-";
-    cb(null, uniquePrefix + file.originalname);
-  },
-});
-const upload = multer({ storage: storage });
 const openai = require("../config/openai-config");
+
+// image upload support middleware
+const multer = require("multer");
+const multerS3 = require("multer-s3");
+const s3 = require("../config/s3-config");
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    acl: "public-read",
+    bucket: "building-blogs",
+    key: function (req, file, cb) {
+      const folder = "images/";
+      const uniqueFileName = Date.now() + "-" + file.originalname;
+      cb(null, folder + uniqueFileName);
+    },
+  }),
+});
+const singleUpload = upload.single("image");
 
 /* ---------- BLOG CONTROLLER FUNCTIONS ---------- */
 /* GET - read all published blogs. */
@@ -76,7 +82,15 @@ exports.openai_blog_post = async (req, res, next) => {
 
 /* POST - create blog.  */
 exports.blog_post = [
-  upload.single("image"),
+  (req, res, next) => {
+    singleUpload(req, res, (err) => {
+      if (err) next(err);
+      else {
+        next();
+      }
+    });
+  },
+
   // validate and sanitize fields
   body("title", "Please enter a valid title.")
     .isLength({ min: 3 })
@@ -107,7 +121,7 @@ exports.blog_post = [
       const newBlog = new Blog({
         title: req.body.title,
         text: req.body.text,
-        image: req.file.filename,
+        image: req.file.key.slice(7),
         author: req.body.author,
         published: req.body.published,
       });
@@ -125,7 +139,16 @@ exports.blog_post = [
 
 /* PUT - update blog. */
 exports.blog_put = [
-  upload.single("image"),
+  (req, res, next) => {
+    singleUpload(req, res, (err) => {
+      if (err) next(err);
+      else {
+        next();
+      }
+    });
+  },
+
+  // validate and sanitize fields
   body("title", "Please enter a valid title.")
     .isLength({ min: 3 })
     .withMessage("Title must be at least 3 characters.")
@@ -148,7 +171,7 @@ exports.blog_put = [
       Blog.findByIdAndUpdate(req.params.id, {
         title: req.body.title,
         text: req.body.text,
-        image: req.file ? req.file.filename : req.body.image,
+        image: req.file.key.slice(7),
         author: req.body.author,
         published: req.body.published,
       }).exec((err, blog) => {
