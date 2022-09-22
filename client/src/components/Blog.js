@@ -40,7 +40,7 @@ const Blog = () => {
       </p>
       <h1 className="title">{decodeHTML(blog.title)}</h1>
       <img
-        src={`/api/images/${blog.image}`}
+        src={`https://building-blogs.s3.amazonaws.com/images/${blog.image}`}
         className="main-image"
         alt="main blog img"
       />

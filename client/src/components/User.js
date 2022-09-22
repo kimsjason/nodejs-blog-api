@@ -33,7 +33,7 @@ const User = ({ blogs }) => {
     <div className="user">
       <div className="info">
         <img
-          src={`/api/avatars/${user.avatar}`}
+          src={`https://building-blogs.s3.amazonaws.com/avatars/${user.avatar}`}
           className="user-avatar"
           alt="user avatar"
         />

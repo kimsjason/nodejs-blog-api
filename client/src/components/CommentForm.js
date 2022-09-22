@@ -32,7 +32,7 @@ const CommentForm = ({ blog }) => {
       <form>
         <div className="user">
           <img
-            src={`/api/avatars/${auth.data.user.avatar}`}
+            src={`https://building-blogs.s3.amazonaws.com/avatars/${auth.data.user.avatar}`}
             className="avatar"
             alt="user avatar"
           />

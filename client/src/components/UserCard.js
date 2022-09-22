@@ -14,7 +14,7 @@ const UserCard = ({ user, blogs }) => {
     >
       <div className="profile">
         <img
-          src={`/api/avatars/${user.avatar}`}
+          src={`https://building-blogs.s3.amazonaws.com/avatars/${user.avatar}`}
           className="profile-avatar"
           alt="profile avatar"
         />

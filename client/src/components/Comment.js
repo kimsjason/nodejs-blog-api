@@ -34,7 +34,7 @@ const Comment = ({ comment }) => {
       ) : null}
       <div className="user">
         <img
-          src={`/api/avatars/${user.avatar}`}
+          src={`https://building-blogs.s3.amazonaws.com/avatars/${user.avatar}`}
           className="avatar"
           alt="user avatar"
         />
